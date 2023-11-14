@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import router from "./routes/user-routes.js";
 import blogRouter from "./routes/blog-routes.js";
-
+ 
 const app = express();
 
 app.use(express.json());

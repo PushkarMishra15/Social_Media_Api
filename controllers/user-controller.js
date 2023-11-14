@@ -11,20 +11,23 @@ export const getUser = async(req, res, next) =>{
         console.log(err);
     }
     if(!users){
+        
         return res.status(404).json({message: "No User Found"});
     }
-    return res.status(200).json({users});
+
+    const userData = users.map(user => ({ email: user.email, name: user.name }));
+    res.json(userData);
 
 };
 
 export const signup = async (req,res,next)=>{
-    console.log("pusgknj");
+
     const {name, email, password} = req.body;
 
     let existingUser;
 
     try{
- 
+      
     existingUser = await User.findOne({email})
 
     }catch(err){
@@ -34,7 +37,6 @@ export const signup = async (req,res,next)=>{
     if(existingUser){
            return res.status(400).json({message:"User Already Exists! Login Instead"})
     }
-
    
     const user = new User({
             name , 
